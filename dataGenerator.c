@@ -22,7 +22,7 @@ int main()
 void generateData(int length, char size[], char name[]){
     // Seed rand with different values using current time
     srand(time(0));
-    FILE *fp;
+    FILE *fp, *mainFp;
 
     // char filename[] = strcat("./Data/", strcat(size,".h"));
     char filename[50]="./Data/", fileHeader[50]="int ";
@@ -59,6 +59,18 @@ void generateData(int length, char size[], char name[]){
     }
 
     fputs("};",fp);
+    fclose(fp);
+    printf("\n[LOG] Saved %d random numbers", length);
+    
+    mainFp = fopen("./Data/data.h", "a");
+    if (mainFp == NULL){
+        printf("\n[ERROR] Cannot open main file for %s", filename);
+        return;
+    }
+    fputs("#include \"", mainFp);
+    fputs(filename, mainFp);
+    fputs("\"\n", mainFp);
+    fclose(mainFp);
     printf("\n[LOG] Saved %d random numbers", length);
 
     return;
