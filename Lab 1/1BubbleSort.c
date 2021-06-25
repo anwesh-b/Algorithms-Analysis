@@ -9,7 +9,6 @@
 
 int main(){
     int length[SIZE] = {10, 100, 500, 1000, 10000};
-    char lengthSize[SIZE][13] = {"ten", "hundered", "fiveHundered", "thousand", "tenThousand"};
     clock_t t;
 
     for(int i=0;i<SIZE;i++){
@@ -22,7 +21,7 @@ int main(){
 
     printf("\n\nFor algo Bubble Sort");
     for(int i=0;i<SIZE;i++){
-        saveBubbleSort(length[i], lengthSize[i]);
+        saveBubbleSort(length[i]);
     }
 
     return 0;
@@ -71,7 +70,7 @@ void bubbleSort(int length, int array[]){
     return;
 }
 
-void saveBubbleSort(int length, char lengthSize[]){
+void saveBubbleSort(int length){
     switch(length){
         case 10:
             saveOutput(10, ten, "bubbleSortTen.txt");
