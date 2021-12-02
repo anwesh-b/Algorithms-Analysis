@@ -4,7 +4,7 @@
 #include <time.h>
 #define SIZE 5
 
-// void generateData(int);
+void generateData(int, char[], char[]);
 
 int main()
 {
@@ -24,24 +24,26 @@ void generateData(int length, char size[], char name[]){
     srand(time(0));
     FILE *fp, *mainFp;
 
-    // char filename[] = strcat("./Data/", strcat(size,".h"));
     char filename[50]="./Data/", fileHeader[50]="int ";
     int randArray[length];
 
+    // Append data size to filename
     strcat(filename, size);
     strcat(filename, ".h");
+    
+    // Initialize file contents
     strcat(fileHeader, size);    
     strcat(fileHeader, "[");    
     strcat(fileHeader, name);    
     strcat(fileHeader, "]={");    
     
+    // Generate numbers of size length
     printf("\n[LOG] Generating %d random numbers", length);
     for(int i=0;i<length;i++){
         randArray[i]=rand()%(length*10);   //Generate number between 0 to length*100-1
     }
     printf("\n[LOG] Generated %d random numbers", length);
 
-    
     //Save the generated array to file
     fp = fopen(filename, "w");
     if (fp == NULL){
@@ -58,20 +60,22 @@ void generateData(int length, char size[], char name[]){
         }
     }
 
+    // Add closing bracket at EOF
     fputs("};",fp);
     fclose(fp);
     printf("\n[LOG] Saved %d random numbers", length);
     
+    // Add imports to common data.h file
     mainFp = fopen("./Data/data.h", "a");
     if (mainFp == NULL){
         printf("\n[ERROR] Cannot open main file for %s", filename);
         return;
     }
-    fputs("#include \"", mainFp);
-    fputs(filename, mainFp);
-    fputs("\"\n", mainFp);
+    fputs("#include \"./", mainFp);
+    fputs(size, mainFp);
+    fputs(".h\"\n", mainFp);
     fclose(mainFp);
-    printf("\n[LOG] Saved %d random numbers", length);
+    printf("\n[LOG] Added in imports", length);
 
     return;
 }
