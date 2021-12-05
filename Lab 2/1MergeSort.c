@@ -7,76 +7,200 @@
 
 #define SIZE 5
 
-int main(){
+int main()
+{
+        printf('hi');
     int length[SIZE] = {10, 100, 500, 1000, 10000};
     clock_t t;
 
     for(int i=0;i<SIZE;i++){
         t=clock();
-        callMergeSort(length[i]);
+        callMergeSort(length[0]);
         t = clock() - t;
         double time_taken = ((double)t)/CLOCKS_PER_SEC;
-        printf("Sorting %d items took %f seconds\n", length[i], time_taken);
+        printf("Sorting %d items took %f seconds\n", length[0], time_taken);
     }
 
     printf("\n\nFor algo Merge Sort");
     for(int i=0;i<SIZE;i++){
-        saveMergeSort(length[i]);
+        saveMergeSort(length[0]);
     }
 
     return 0;
 }
 
-void callMergeSort(int length){
-    switch(length){
-        case 10:
-            mergeSort(10, ten);
-            break;
-        case 100:
-            mergeSort(100, hundered);
-            break;
-        case 500:
-            mergeSort(500, fiveHundered);
-            break;
-        case 1000:
-            mergeSort(1000, thousand);
-            break;
-        case 10000:
-            mergeSort(10000, tenThousand);
-            break;
-        default:
-            printf("Check your input length and try again later :)");
-            break;
-        
+void callMergeSort(int length)
+{
+    // printf('la k xa');
+    switch (length)
+    {
+    case 10:
+        mergeSortAlgo(10, ten);
+        break;
+    case 100:
+        mergeSortAlgo(100, hundered);
+        break;
+    case 500:
+        mergeSortAlgo(500, fiveHundered);
+        break;
+    case 1000:
+        mergeSortAlgo(1000, thousand);
+        break;
+    case 10000:
+        mergeSortAlgo(10000, tenThousand);
+        break;
+    default:
+        printf("Check your input length and try again later :)");
+        break;
+    }
+
+    return;
+}
+
+// void merge(int array[], int left, int mid, int right)
+// {
+//     int lSize = mid - left + 1;
+//     int rSize = right - mid;
+
+//     int lSubArr[lSize];
+//     int rSubArr[rSize];
+//     int i, j;
+
+//     for (i = 0; i < lSize; i++)
+//     {
+//         lSubArr[i] = array[left + i];
+//         printf('first');
+//     }
+
+//     for (i = 0; i < rSize; i++)
+//     {
+//         rSubArr[i] = array[mid + i + 1];
+//         printf('second');
+//     }
+
+//     i = 0;
+//     j = 0;
+
+//     while (i <= mid && j <= right)
+//     {
+//         if (lSubArr[i] < rSubArr[j])
+//         {
+//             array[left + i + j] = lSubArr[i++];
+//         }
+//         else
+//         {
+//             array[left + i + j] = rSubArr[j++];
+//         }
+//         printf('third');
+//     }
+
+//     while (i < mid)
+//     {
+//         array[left + i + j] = lSubArr[i++];
+//         printf('fourth');
+//     }
+
+//     while (j < right)
+//     {
+//         array[left + i + j + 1] = rSubArr[j++];
+//         printf('fifth');
+//     }
+
+//     return;
+// }
+
+// void mergeSort(int array[], int left, int right)
+// {
+//     if (left < right)
+//     {
+//         int mid;
+
+//         mid = (left + right) / 2;
+
+//         mergeSort(array, left, mid);
+//         mergeSort(array, mid + 1, right);
+
+//         merge(array, left, mid, right);
+//     }
+// }
+
+void merge(int A[], int left, int right, int mid)
+{
+    int i = left, j = mid + 1, k = 0;
+    int B[right - left + 1];
+
+    while (i <= mid && j <= right)
+    {
+        // B[k++] = A[i]<=A[j] ? A[i++]:A[j++];
+        if (A[i] <= A[j])
+            B[k++] = A[i++];
+        else
+            B[k++] = A[j++];
+    }
+
+    while (i <= mid)
+    {
+        B[k++] = A[i++];
+    }
+
+    while (j <= right)
+    {
+        B[k++] = A[j++];
+    }
+
+    for (i = left; i <= right; i++)
+    {
+        A[i] = B[i - left];
     }
     return;
 }
+// Divide the array into two subarrays, sort them and merge them
+void mergeSort(int arr[], int l, int r) {
+  if (l < r) {
 
-void mergeSort(int length, int array[]){
-    // TODO: Implement Merge Sort
+    // m is the point where the array is divided into two subarrays
+    int m = l + (r - l) / 2;
+
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+
+    // Merge the sorted subarrays
+    merge(arr, l, m, r);
+    return;
+  }
+}
+
+void mergeSortAlgo(int length, int array[])
+{
+    printf('call ta bhayo hai');
+
+    mergeSort(array, 0, length-1);
+
     return;
 }
 
-void saveMergeSort(int length){
-    switch(length){
-        case 10:
-            saveOutput(10, ten, "mergeSortTen.txt");
-            break;
-        case 100:
-            saveOutput(100, hundered, "mergeSortHundered.txt");
-            break;
-        case 500:
-            saveOutput(500, fiveHundered, "mergeSortFiveHundered.txt");
-            break;
-        case 1000:
-            saveOutput(1000, thousand, "mergeSortThousand.txt");
-            break;
-        case 10000:
-            saveOutput(10000, tenThousand, "mergeSortTenThousand.txt");
-            break;
-        default:
-            printf("Check your input length and try again later :)");
-            break;
+void saveMergeSort(int length)
+{
+    switch (length)
+    {
+    case 10:
+        saveOutput(10, ten, "mergeSortTen.txt");
+        break;
+    case 100:
+        saveOutput(100, hundered, "mergeSortHundered.txt");
+        break;
+    case 500:
+        saveOutput(500, fiveHundered, "mergeSortFiveHundered.txt");
+        break;
+    case 1000:
+        saveOutput(1000, thousand, "mergeSortThousand.txt");
+        break;
+    case 10000:
+        saveOutput(10000, tenThousand, "mergeSortTenThousand.txt");
+        break;
+    default:
+        printf("Check your input length and try again later :)");
+        break;
     }
 
     return;

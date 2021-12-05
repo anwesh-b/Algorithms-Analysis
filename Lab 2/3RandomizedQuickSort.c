@@ -47,13 +47,13 @@ void callRandomizedQuickSort(int length){
         default:
             printf("Check your input length and try again later :)");
             break;
-        
     }
+
     return;
 }
 
 void randomizedQuickSort(int length, int array[]){
-    // TODO: Implement Randomized Quick Sort
+    
     return;
 }
 
