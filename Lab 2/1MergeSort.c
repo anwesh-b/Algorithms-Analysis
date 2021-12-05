@@ -6,24 +6,25 @@
 #include "../outputSaver.h"
 
 #define SIZE 5
-
+int count = 0;
 int main()
 {
-        printf('hi');
     int length[SIZE] = {10, 100, 500, 1000, 10000};
     clock_t t;
 
-    for(int i=0;i<SIZE;i++){
-        t=clock();
-        callMergeSort(length[0]);
+    for (int i = 0; i < SIZE; i++)
+    {
+        t = clock();
+        callMergeSort(length[i]);
         t = clock() - t;
-        double time_taken = ((double)t)/CLOCKS_PER_SEC;
-        printf("Sorting %d items took %f seconds\n", length[0], time_taken);
+        double time_taken = ((double)t) / CLOCKS_PER_SEC;
+        printf("Sorting %d items took %f seconds\n", length[i], time_taken);
     }
 
     printf("\n\nFor algo Merge Sort");
-    for(int i=0;i<SIZE;i++){
-        saveMergeSort(length[0]);
+    for (int i = 0; i < SIZE; i++)
+    {
+        saveMergeSort(length[i]);
     }
 
     return 0;
@@ -31,7 +32,6 @@ int main()
 
 void callMergeSort(int length)
 {
-    // printf('la k xa');
     switch (length)
     {
     case 10:
@@ -57,74 +57,7 @@ void callMergeSort(int length)
     return;
 }
 
-// void merge(int array[], int left, int mid, int right)
-// {
-//     int lSize = mid - left + 1;
-//     int rSize = right - mid;
-
-//     int lSubArr[lSize];
-//     int rSubArr[rSize];
-//     int i, j;
-
-//     for (i = 0; i < lSize; i++)
-//     {
-//         lSubArr[i] = array[left + i];
-//         printf('first');
-//     }
-
-//     for (i = 0; i < rSize; i++)
-//     {
-//         rSubArr[i] = array[mid + i + 1];
-//         printf('second');
-//     }
-
-//     i = 0;
-//     j = 0;
-
-//     while (i <= mid && j <= right)
-//     {
-//         if (lSubArr[i] < rSubArr[j])
-//         {
-//             array[left + i + j] = lSubArr[i++];
-//         }
-//         else
-//         {
-//             array[left + i + j] = rSubArr[j++];
-//         }
-//         printf('third');
-//     }
-
-//     while (i < mid)
-//     {
-//         array[left + i + j] = lSubArr[i++];
-//         printf('fourth');
-//     }
-
-//     while (j < right)
-//     {
-//         array[left + i + j + 1] = rSubArr[j++];
-//         printf('fifth');
-//     }
-
-//     return;
-// }
-
-// void mergeSort(int array[], int left, int right)
-// {
-//     if (left < right)
-//     {
-//         int mid;
-
-//         mid = (left + right) / 2;
-
-//         mergeSort(array, left, mid);
-//         mergeSort(array, mid + 1, right);
-
-//         merge(array, left, mid, right);
-//     }
-// }
-
-void merge(int A[], int left, int right, int mid)
+void merge(int A[], int left, int mid, int right)
 {
     int i = left, j = mid + 1, k = 0;
     int B[right - left + 1];
@@ -155,26 +88,29 @@ void merge(int A[], int left, int right, int mid)
     return;
 }
 // Divide the array into two subarrays, sort them and merge them
-void mergeSort(int arr[], int l, int r) {
-  if (l < r) {
+void mergeSort(int arr[], int l, int r)
+{
+    // printf("\n%d", count++);
+    // printf("\ninside mergeSort");
+    if (l < r)
+    {
 
-    // m is the point where the array is divided into two subarrays
-    int m = l + (r - l) / 2;
+        // printf("\ninside if statement");
+        // m is the point where the array is divided into two subarrays
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
 
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-
-    // Merge the sorted subarrays
-    merge(arr, l, m, r);
-    return;
-  }
+        // Merge the sorted subarrays
+        merge(arr, l, m, r);
+        return;
+    }
 }
 
 void mergeSortAlgo(int length, int array[])
 {
-    printf('call ta bhayo hai');
 
-    mergeSort(array, 0, length-1);
+    mergeSort(array, 0, length - 1);
 
     return;
 }
