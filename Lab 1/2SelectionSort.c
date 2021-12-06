@@ -28,18 +28,23 @@ int main(){
 }
 
 void selectionSort(int length, int array[]){
+    // Run selection sort on the array from 0 to length-1
     for(int i=0; i<length-1; i++){
+        // Find the minimum element position in the unsorted array
         int temp, minPos = i;
+        
+        // Find the minimum element in the unsorted array
         for(int j=i+1; j<length; j++){
             if(array[j] < array[minPos]){
                 minPos = j;
             }
         }
+
+        // Swap the minimum element with the first element
         temp = array[minPos];
         array[minPos] = array[i];
         array[i] = temp;
     }
-
     return;
 }
 

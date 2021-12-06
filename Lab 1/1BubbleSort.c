@@ -53,12 +53,24 @@ void callBubbleSort(int length){
 }
 
 void bubbleSort(int length, int array[]){
+    //Initialize temp variable to store value during swapping
     int temp;
+
+    //Initialize flag to check if any swap occured
     bool swap = true;
+
+    /*
+    Loop until no swap occured i.e. array is already sorted
+    and until the last element is reached
+    */
     for(int i=0; swap == true && i<length-1; i++){
+        //Initialize swap to false for each iteration
         swap = false;
+    
         for(int j=0; j<length-i-1; j++){
+            //Check if the current element is greater than the next element
             if(array[j]>array[j+1]){
+                //Swap the two elements
                 swap = true;
                 temp = array[j];
                 array[j] = array[j+1];
@@ -66,7 +78,6 @@ void bubbleSort(int length, int array[]){
             }
         }
     }
-
     return;
 }
 

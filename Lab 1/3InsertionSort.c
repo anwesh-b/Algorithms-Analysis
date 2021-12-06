@@ -28,9 +28,13 @@ int main(){
 }
 
 void insertionSort(int length, int array[]){
+    // Run the insertion sort algorithm from 1 to length
     for(int i=1; i<length; i++){
+        // Run algorithm from i to 0
         for(int j=i; j>0; j--){
+            // Compare the current value with the previous value
             if(array[j] < array[j-1]){
+                // Swap the values if the current value is smaller than the previous value
                 int temp;
                 temp = array[j];
                 array[j] = array[j-1];
@@ -38,7 +42,6 @@ void insertionSort(int length, int array[]){
             }
         }
     }
-
     return;
 }
 
